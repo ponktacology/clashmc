@@ -2,7 +2,7 @@
 clashmc.pl plugin bundle public release
 
 ### Notice:
-There are few bugs with making this <b>NOT</b> usable for production.
+There are few bugs which make this <b>NOT</b> usable for production.
 This is just for curious people to know how such servers work.
 
 ### Details:
