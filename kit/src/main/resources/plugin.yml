@@ -1,0 +1,6 @@
+name: kits
+main: me.ponktacology.clashmc.kit.KitPluginBootstrap
+author: ponktacology
+version: 1.0
+depend:
+  - core

@@ -1,0 +1,6 @@
+name: backups
+main: me.ponktacology.clashmc.backup.BackupPluginBootstrap
+version: 1.0
+author: ponktacology
+depend:
+  - core

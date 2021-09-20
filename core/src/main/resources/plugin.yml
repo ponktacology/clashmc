@@ -1,0 +1,9 @@
+name: core
+version: ${project.version}
+main: me.ponktacology.clashmc.core.CorePluginBootstrap
+author: ponktacology
+depend:
+  - loader
+  - ProtocolLib
+loadbefore:
+  - sectors

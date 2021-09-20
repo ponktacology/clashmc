@@ -1,0 +1,8 @@
+name: guilds
+version: ${project.version}
+main: me.ponktacology.clashmc.guild.GuildPluginBootstrap
+author: ponktacology
+depend:
+  - core
+  - sectors
+  - HolographicDisplays

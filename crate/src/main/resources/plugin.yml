@@ -1,0 +1,7 @@
+name: crates
+main: me.ponktacology.clashmc.crate.CratePluginBootstrap
+author: ponktacology
+version: 1.0
+depend:
+  - core
+  - guilds

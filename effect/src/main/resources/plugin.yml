@@ -1,0 +1,6 @@
+name: effects
+version: ${project.version}
+main: me.ponktacology.clashmc.effect.EffectPluginBootstrap
+author: ponktacology
+depend:
+  - core

@@ -1,0 +1,7 @@
+name: farmers
+version: ${project.version}
+main: me.ponktacology.clashmc.farmer.FarmerPluginBootstrap
+author: ponktacology
+depend:
+  - core
+  - guilds

@@ -1,0 +1,7 @@
+name: queue
+version: ${project.version}
+main: me.ponktacology.clashmc.queue.QueuePluginBootstrap
+author: ponktacology
+depend:
+  - core
+  - sectors

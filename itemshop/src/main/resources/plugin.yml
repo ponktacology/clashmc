@@ -1,0 +1,8 @@
+name: itemshop
+main: me.ponktacology.clashmc.itemshop.ItemShopPluginBootstrap
+author: ponktacology
+version: 1.0
+depend:
+  - core
+  - guilds
+  - crates

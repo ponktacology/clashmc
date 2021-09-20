@@ -1,0 +1,6 @@
+name: loader
+main: me.ponktacology.loader.LoaderPluginBootstrap
+version: ${project.version}
+author: ponktacology
+loadbefore:
+  - core

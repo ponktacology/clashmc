@@ -1,0 +1,10 @@
+name: drop
+version: ${project.version}
+main: me.ponktacology.clashmc.drop.DropPluginBootstrap
+author: ponktacology
+depend:
+  - core
+  - guilds
+  - sectors
+  - crates
+  - safes

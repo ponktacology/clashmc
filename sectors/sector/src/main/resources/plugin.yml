@@ -1,0 +1,6 @@
+name: sectors
+version: ${project.version}
+main: me.ponktacology.clashmc.sector.SectorPluginBootstrap
+author: ponktacology
+depend:
+  - core

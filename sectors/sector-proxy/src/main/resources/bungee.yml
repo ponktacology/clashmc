@@ -1,0 +1,4 @@
+name: SectorProxy
+version: ${project.version}
+main: me.ponktacology.clashmc.sector.proxy.SectorProxyBootstrap
+author: ponktacology

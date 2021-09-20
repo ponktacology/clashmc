@@ -1,0 +1,111 @@
+package me.ponktacology.clashmc.core.menu;
+
+import me.ponktacology.clashmc.api.dispatcher.TaskDispatcher;
+import org.bukkit.Material;
+import org.bukkit.entity.Player;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
+import org.bukkit.event.Listener;
+import org.bukkit.event.inventory.ClickType;
+import org.bukkit.event.inventory.InventoryClickEvent;
+import org.bukkit.event.inventory.InventoryCloseEvent;
+
+
+import java.util.concurrent.TimeUnit;
+
+public class MenuListener implements Listener {
+
+  private final TaskDispatcher dispatcher;
+
+  public MenuListener(TaskDispatcher dispatcher) {
+    this.dispatcher = dispatcher;
+  }
+
+  @EventHandler(ignoreCancelled = true, priority = EventPriority.MONITOR)
+  public void onButtonPress( InventoryClickEvent event) {
+    Player player = (Player) event.getWhoClicked();
+    Menu openMenu = Menu.currentlyOpenedMenus.get(player.getUniqueId());
+
+    if (openMenu == null) {
+      return;
+    }
+
+    if (!openMenu.isCanAddItems()) {
+      if (event.getSlot() != event.getRawSlot()) {
+        if ((event.getClick() == ClickType.SHIFT_LEFT
+            || event.getClick() == ClickType.SHIFT_RIGHT)) {
+          event.setCancelled(true);
+        }
+
+        if (event.getCurrentItem() != null && event.getCurrentItem().getType() != Material.AIR) {
+          event.setCancelled(true);
+        }
+        return;
+      }
+    }
+
+    if (openMenu.getButtons().containsKey(event.getSlot())) {
+      Button button = openMenu.getButtons().get(event.getSlot());
+      boolean cancel = button.shouldCancel(player, event.getClick());
+
+      if (!openMenu.isCanAddItems()) {
+        if (!cancel
+            && (event.getClick() == ClickType.SHIFT_LEFT
+                || event.getClick() == ClickType.SHIFT_RIGHT)) {
+          event.setCancelled(true);
+          if (event.getCurrentItem() != null) {
+            player.getInventory().addItem(event.getCurrentItem());
+          }
+        } else {
+          event.setCancelled(cancel);
+        }
+      }
+
+      button.clicked(player, event.getClick());
+      button.clicked(player, event.getSlot(), event.getClick(), event.getHotbarButton());
+
+      if (Menu.currentlyOpenedMenus.containsKey(player.getUniqueId())) {
+        Menu newMenu = Menu.currentlyOpenedMenus.get(player.getUniqueId());
+
+        if (newMenu == openMenu) {
+          boolean buttonUpdate = button.shouldUpdate(player, event.getClick());
+
+          if ((newMenu.isUpdateAfterClick() && buttonUpdate) || buttonUpdate) {
+            openMenu.setClosedByMenu(true);
+            newMenu.openMenu(player);
+          }
+        }
+      } else if (button.shouldUpdate(player, event.getClick())) {
+        openMenu.setClosedByMenu(true);
+        openMenu.openMenu(player);
+      }
+
+      if (event.isCancelled()) {
+        dispatcher.runLater(player::updateInventory, 100L, TimeUnit.MILLISECONDS);
+      }
+    } else {
+      if (!openMenu.isCanAddItems()) {
+        if (event.getCurrentItem() != null) {
+          event.setCancelled(true);
+        }
+
+        if ((event.getClick() == ClickType.SHIFT_LEFT
+            || event.getClick() == ClickType.SHIFT_RIGHT)) {
+          event.setCancelled(true);
+        }
+      }
+    }
+  }
+
+  @EventHandler(priority = EventPriority.HIGH)
+  public void onInventoryClose( InventoryCloseEvent event) {
+    Player player = (Player) event.getPlayer();
+    Menu openMenu = Menu.currentlyOpenedMenus.get(player.getUniqueId());
+
+    if (openMenu != null) {
+      openMenu.onClose(player);
+
+      Menu.currentlyOpenedMenus.remove(player.getUniqueId());
+    }
+  }
+}

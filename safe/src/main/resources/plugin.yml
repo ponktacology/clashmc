@@ -1,0 +1,6 @@
+name: safes
+main: me.ponktacology.clashmc.safe.SafePluginBootstrap
+author: ponktacology
+version: 1.0
+depend:
+  - core

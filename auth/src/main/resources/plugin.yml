@@ -1,0 +1,6 @@
+name: auth
+version: ${project.version}
+main: me.ponktacology.clashmc.auth.AuthPluginBootstrap
+author: ponktacology
+depend:
+  - core
