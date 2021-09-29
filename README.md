@@ -2,9 +2,9 @@
 clashmc.pl plugin bundle public release
 
 ### Notice:
-The release of clashmc.pl was rushed and these plugins weren't tested enough.
-There are few bugs which make this <b>NOT</b> usable for production.
-This is just for curious people to know how such servers work.
+* The release of clashmc.pl was rushed and these plugins weren't tested enough.
+* There are few bugs which make this <b>NOT</b> usable for production.
+* This is just for curious people to know how such servers work.
 
 ### Details:
 * `api`:
